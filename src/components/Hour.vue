@@ -1,7 +1,7 @@
 <template>
     <p>{{ twelveHourTime(timestamp) }}</p>
     <p>{{ description }} <img :src="icon" :alt="description"></p>
-    <Temperature :temperature="temp" :fontSizeBase="12"/>
+    <p><Temperature :temp="temp" :unit="'F'"/></p>
     <p>{{ Math.round(humidity) }}%</p>
     <p>{{ Math.round(windSpeed) }} mph</p>
     <p>{{ Math.round(pop * 100) }}%</p>
@@ -39,20 +39,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-    p, div{
+    p {
         display: flex;
         align-items: center;
         justify-content: center;
         margin: 0;
         border-right: 1px solid lightgrey;
-
-        &:nth-child(12n+2), &:nth-child(12n+3), &:nth-child(12n+4), &:nth-child(12n+5), &:nth-child(12n+6), &:nth-child(12n+7) {
-            background-color: #e7e7e7;
-        }
-
-        &:nth-child(6n+1) {
-            border: none;
-        }
     }
 
     img {

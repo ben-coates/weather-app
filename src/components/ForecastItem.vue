@@ -2,12 +2,9 @@
     <div class="forecast-item">
         <h1 class="day">{{ this.convertToWeekday(day) }} </h1>
         <img class="icon" :src="icon" :alt="description" />
-        <Temperature :temperature="this.high"/>
-        <Temperature :temperature="this.low"/>
-        <div class="precipitation">
-            <p>Chance of Precipitation</p>
-            <p>{{ Math.round(precipitation * 100)}}%</p>
-        </div>
+        <p class="high">High: <Temperature :temp="high" :unit="'F'"/></p>
+        <p class="low">Low: <Temperature :temp="low" :unit="'F'"/></p>
+        <p class="precipitation">PoP {{ Math.round(precipitation * 100)}}%</p>
     </div>
 </template>
 
@@ -45,35 +42,76 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+    @import '../scss/_imports.scss';
+
     .forecast-item {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: rgb(256,256,256);
-            border-radius: 1.2rem;
-            padding: 4rem;
-            box-shadow: 0rem 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $component-background-color;
+        border-radius: $border-radius;
+        padding: 2rem;
+        box-shadow: 0rem 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
+        font-size: 2rem;
+        text-align: center;
 
         .day {
-            font-size: 3rem;
+            font-size: 2rem;
             text-transform: uppercase;
             margin: 0;
         }
 
         .icon {
             border-radius: 50%;
-            height: 10rem;
+            max-width: 20%;
+        }
+
+        .high, .low {
+            margin: 0;
         }
 
         .precipitation {
-            font-size: 2rem;
             color: rgba(0,0,0,0.54);
             margin: 0;
             text-align: center;
 
             p {
                 margin: 0;
+            }
+        }
+    }
+
+    @include breakpoint(xxl) {
+        .forecast-item {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-color: rgb(256,256,256);
+                border-radius: 1.2rem;
+                padding: 4rem;
+                box-shadow: 0rem 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
+
+            .day {
+                font-size: 3rem;
+                text-transform: uppercase;
+                margin: 0;
+            }
+
+            .icon {
+                border-radius: 50%;
+                max-width: 10rem;
+            }
+
+            .precipitation {
+                font-size: 2rem;
+                color: rgba(0,0,0,0.54);
+                margin: 0;
+                text-align: center;
+
+                p {
+                    margin: 0;
+                }
             }
         }
     }
